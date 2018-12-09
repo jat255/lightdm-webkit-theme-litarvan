@@ -59,7 +59,7 @@
         font-family: 'Lato', 'Noto Sans', serif;
         font-weight: 300;
         font-style: italic;
-        font-size: 32px;
+        font-size: 4vh;
 
         margin-bottom: 11.5vh;
         letter-spacing: 0.25px;
@@ -68,9 +68,9 @@
     #label {
         font-family: 'Lato', 'Noto Sans', serif;
         font-weight: normal;
-        font-size: 12pt;
-        max-width: 75%;
+        font-size: 2.0vh;
+        max-width: 75vw;
         margin: auto;
-        margin-bottom: 3%;
+        margin-bottom: 2.0vh;
     }
 </style>
