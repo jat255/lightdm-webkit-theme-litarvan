@@ -1,6 +1,7 @@
 <template>
     <div id="splash" :class="{ 'clock-only': clockOnly }">
         <Clock />
+        <div id="label">{{ label }}</div>
         <div v-if="!clockOnly" id="trigger">{{ trigger }}</div>
     </div>
 </template>
@@ -18,6 +19,7 @@
         },
         data() {
             return {
+                label: trans('label'),
                 trigger: trans('trigger'),
                 clockOnly: settings.disableSplashText
             }
