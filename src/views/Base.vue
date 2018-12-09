@@ -42,7 +42,7 @@
         color: $secondary-color;
     }
 
-    // .blured {
-    //     filter: blur(10px);
-    // }
+    .blured {
+        filter: blur(20px);
+    }
 </style>

@@ -162,12 +162,12 @@
     }
 
     #login-content {
-        margin-top: 11.5vh;
+        margin-top: 30vh;
     }
 
     @media (min-height: 850px) {
         #login-content {
-            margin-top: 14vh;
+            margin-top: 30vh;
         }
     }
 
