@@ -1,0 +1,33 @@
+# Maintainer: Joshua Taillon (jat255 at gmail.com)
+pkgname=lightdm-webkit-theme-litarvan-git
+pkgver=v3.0.0.pre2.r7.g277f4b0
+pkgrel=1
+pkgdesc="Modern and full-featured LightDM theme (custom fork)"
+arch=('any')
+url='https://github.com/Litarvan/$pkgname%-git'
+license=('BSD-3-Clause')
+depends=('lightdm-webkit2-greeter')
+makedepends=('git' 'npm') 
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=('git+https://github.com/jat255/lightdm-webkit-theme-litarvan.git#branch=govt_label')
+md5sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/${pkgname%-git}"
+	git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+	cd "$srcdir/${pkgname%-git}"
+	npm audit fix
+	./build.sh
+}
+
+package() {
+	cd "$srcdir/${pkgname%-git}"
+	orig_pkgver=$(cat version)
+	extract_dir="$pkgdir/usr/share/lightdm-webkit/themes/litarvan/" 
+	mkdir -p $extract_dir
+	tar xzvf "${pkgname%-git}-${orig_pkgver}.tar.gz" -C "$extract_dir"
+}
