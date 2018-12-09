@@ -64,4 +64,13 @@
         margin-bottom: 11.5vh;
         letter-spacing: 0.25px;
     }
+
+    #label {
+        font-family: 'Lato', 'Noto Sans', serif;
+        font-weight: normal;
+        font-size: 12pt;
+        max-width: 75%;
+        margin: auto;
+        margin-bottom: 3%;
+    }
 </style>
