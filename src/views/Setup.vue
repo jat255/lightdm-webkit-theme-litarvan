@@ -139,6 +139,7 @@
 
         .item.user, .item.desktop {
             display: block;
+            background: $password-field-background;
         }
 
         .item.user:hover, .item.desktop:hover {
