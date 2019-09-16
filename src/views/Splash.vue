@@ -60,6 +60,7 @@
         font-weight: 300;
         font-style: italic;
         font-size: 4vh;
+        cursor: default;
 
         margin-bottom: 11.5vh;
         letter-spacing: 0.25px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="setup" :class="{ 'fix': fix }">
+    <div id="setup" :class="{ 'fix': fix }">
         <h1 id="setup-title">{{ texts.setup }}</h1>
 
         <div id="layouts">
@@ -16,12 +16,14 @@
             <div class="checkbox-line"><Checkbox v-model="settings.disableSplash" /><label>{{ texts.disableSplash }}</label></div>
             <div class="checkbox-line"><Checkbox v-model="settings.disableSplashText" /><label>{{ texts.disableSplashText }}</label></div>
             <div class="checkbox-line"><Checkbox v-model="settings.disableIntro" /><label>{{ texts.disableIntro }}</label></div>
+            <div class="checkbox-line"><Checkbox v-model="settings.clock12" /><label>{{ texts.clock12 }}</label></div>
         </div>
 
         <div id="right-settings" class="settings">
             <div class="checkbox-line"><Checkbox v-model="settings.disableFade" /><label>{{ texts.disableFade }}</label></div>
             <div class="checkbox-line"><Checkbox v-model="settings.roundAvatar" /><label>{{ texts.roundAvatar }}</label></div>
             <div class="checkbox-line"><Checkbox v-model="settings.disableAvatar" /><label>{{ texts.disableAvatar }}</label></div>
+            <div class="disable-zoom">-<div class="checkbox-line"><Checkbox v-model="settings.disableZoom" /><label>{{ texts.disableZoom }}</label></div></div>
         </div>
 
         <div @click="save()">
@@ -55,7 +57,9 @@
                     disableIntro: trans('disableIntro'),
                     disableFade: trans('disableFade'),
                     roundAvatar: trans('roundAvatar'),
-                    disableAvatar: trans('disableAvatar')
+                    disableAvatar: trans('disableAvatar'),
+                    disableZoom: trans('disableZoom'),
+                    clock12: trans('clock12')
                 }
             }
         },
@@ -73,7 +77,7 @@
 <style lang="scss">
     @import '../theme';
 
-    .setup {
+    #setup {
         font-family: 'Lato', 'Noto Sans', sans-serif;
         font-weight: 300;
         font-style: italic;
@@ -100,7 +104,7 @@
     .layout {
         display: inline-block;
 
-        border: solid 2px $outer-foreground;
+        border: solid 2px darken($outer-foreground, 60);
         border-radius: 2px;
         transition: border-color 125ms ease-in-out;
 
@@ -114,11 +118,13 @@
 
     .layout:hover {
         cursor: pointer;
-        border-color: lighten($primary-color, 25);
+        // border-color: lighten($primary-color, 25);
+        border-color: darken($outer-foreground, 30);
     }
 
     .layout.selected {
-        border-color: $primary-color;
+        // border-color: $primary-color;
+        border-color: $outer-foreground;
     }
 
     #classic-layout {
@@ -187,7 +193,7 @@
         }
     }
 
-    label {
+    #setup label {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -206,7 +212,7 @@
         width: 35%;
 
         .checkbox-line {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .checkbox {
@@ -224,7 +230,7 @@
         }
 
         .checkbox-line {
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
     }
 
@@ -261,6 +267,21 @@
 
         #left-settings {
             margin-left: 2.25%;
+        }
+    }
+
+    .disable-zoom {
+        color: black
+    }
+
+    .disable-zoom .checkbox-line {
+        display: none;
+        color: white;
+    }
+
+    @media screen and (min-width: 3000px) and (min-height: 1200px) {
+        .disable-zoom .checkbox-line {
+            display: block;
         }
     }
 </style>

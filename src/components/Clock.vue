@@ -1,6 +1,6 @@
 <template>
     <div class="clock" :class="{ 'small': small }">
-        <span id="hours">{{ hours | pad }}</span>:{{ minutes | pad }}
+        <span id="hours">{{ part !== '' ? hours : $options.filters.pad(hours) }}</span>:{{ minutes | pad }}<span id="part">{{ part }}</span>
 
         <div id="date">
             {{ date }}
@@ -10,6 +10,7 @@
 
 <script>
     import { getLocale } from '@/translations';
+    import { settings } from '@/settings';
 
     export default {
         name: 'clock',
@@ -31,6 +32,11 @@
                 this.hours = date.getHours();
                 this.minutes = date.getMinutes();
 
+                if (settings.clock12) {
+                    this.part = this.hours >= 12 ? 'PM' : 'AM';
+                    this.hours = this.hours === 12 || this.hours === 0 ? 12 : this.hours % 12;
+                }
+
                 let strs = date.toLocaleDateString(getLocale(), {
                     weekday: 'long',
                     day: 'numeric',
@@ -50,7 +56,8 @@
             return {
                 hours: '00',
                 minutes: '00',
-                date: ''
+                date: '',
+                part: ''
             };
         },
 
@@ -68,6 +75,7 @@
         line-height: 1.1;
 
         text-align: center;
+        cursor: default;
     }
 
     .clock.small {
@@ -85,9 +93,15 @@
         font-size: 156px;*/
     }
 
+    #part {
+        font-size: 18px;
+        font-weight: normal;
+    }
+
     #date {
         font-weight: normal;
         margin-top: 2.25vh;
         font-size: 28px;
+        cursor: default;
     }
 </style>

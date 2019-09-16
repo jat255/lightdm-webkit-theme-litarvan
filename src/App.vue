@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" :class="{ 'disableZoom': disableZoom }">
         <transition name="fade">
             <router-view/>
         </transition>
@@ -12,6 +12,11 @@
     export default {
         mounted() {
             this.$router.push('/intro/initial');
+        },
+        data() {
+            return {
+                disableZoom: settings.disableZoom
+            }
         }
     }
 </script>
@@ -21,11 +26,12 @@
 
     html.lightdm {
         background: $outer-background !important;
+        color: $secondary-color;
     }
 
     /* HiDPI */
     @media screen and (min-width: 3000px) and (min-height: 1200px) {
-        html {
+        #app:not(.disableZoom) {
             zoom: 2.0;
         }
     }
@@ -70,13 +76,20 @@
         overflow-y:hidden;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+        cursor: default;
+    }
+
+    img {
+        -webkit-user-drag: none;
+    }
+
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        -webkit-user-select: none;
 
         text-align: center;
-
-        color: $secondary-color;
     }
 
     .fade-enter-active, .fade-leave-active {
